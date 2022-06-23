@@ -139,8 +139,8 @@ if DEBUG:
     GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.path.join(BASE_DIR, "eeegaragewebsite-filebackend.json")
 else:
     # Production deployment code here. Might want to use a JSON file again, or save to an environment variable
-    
+    pass
 #cors settings, add front end domains to the whitelist. localhost:3000 is the default domain when using create-react-app for example
 CORS_ORIGIN_WHITELIST = [
-  'http://localhost:3000',
+    'http://localhost:3000',
 ]
