@@ -135,9 +135,5 @@ if DEBUG:
     # In debug mode, the JSON key file is in the file directory & used for authentication. 
     GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.path.join(BASE_DIR, "eeegaragewebsite-filebackend.json")
 else:
-    # In production, access JSON file data using an environment variable
-    # GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE setting is set to None
-    # Store the JSON data in a variable named "GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS" where it is automatically accessed
-    GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
-
+    # Production deployment code here. Might want to use a JSON file again, or save to an environment variable
 
