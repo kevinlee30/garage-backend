@@ -15,9 +15,15 @@ class AmbassadorSerializer(serializers.HyperlinkedModelSerializer):
     def get_displayImageUrl(self, obj):
         return trimDefaultURL(obj.displayImage.url)
         
+    contentImages = serializers.SerializerMethodField()
+    def get_contentImages(self, obj):
+        urlList = []
+        for image in obj.contentImages.all():
+            urlList.append(trimDefaultURL(image.image.url))
+        return urlList
     class Meta:
         model = Ambassador
-        fields = ['url', 'name', 'desc', 'displayImageUrl']
+        fields = ['url', 'name', 'desc', 'displayImageUrl', 'contentImages']
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     #Uses a method field to just get the image/file URL, without other data
@@ -29,9 +35,16 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     def get_contentVideoUrl(self, obj):
         return trimDefaultURL(obj.contentVideo.url)
         
+    contentImages = serializers.SerializerMethodField()
+    def get_contentImages(self, obj):
+        urlList = []
+        for image in obj.contentImages.all():
+            urlList.append(trimDefaultURL(image.image.url))
+        return urlList
+    
     class Meta:
         model = Event
-        fields = ['url', 'name', 'date', 'desc', 'article', 'link', 'isFlagshipEvent', 'displayImageUrl', 'contentVideoUrl']
+        fields = ['url', 'name', 'date', 'desc', 'article', 'link', 'isFlagshipEvent', 'displayImageUrl', 'contentVideoUrl', 'contentImages']
 
 class WorkshopSerializer(serializers.HyperlinkedModelSerializer):
     #Uses a method field to just get the image/file URL, without other data
@@ -43,9 +56,16 @@ class WorkshopSerializer(serializers.HyperlinkedModelSerializer):
     def get_contentVideoUrl(self, obj):
         return trimDefaultURL(obj.contentVideo.url)
         
+    contentImages = serializers.SerializerMethodField()
+    def get_contentImages(self, obj):
+        urlList = []
+        for image in obj.contentImages.all():
+            urlList.append(trimDefaultURL(image.image.url))
+        return urlList
+        
     class Meta:
         model = Workshop
-        fields = ['url', 'name', 'date', 'desc', 'article', 'link', 'displayImageUrl', 'contentVideoUrl']
+        fields = ['url', 'name', 'date', 'desc', 'article', 'link', 'displayImageUrl', 'contentVideoUrl', 'contentImages']
         
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     #Uses a method field to just get the image/file URL, without other data
@@ -57,9 +77,16 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     def get_contentVideoUrl(self, obj):
         return trimDefaultURL(obj.contentVideo.url)
         
+    contentImages = serializers.SerializerMethodField()
+    def get_contentImages(self, obj):
+        urlList = []
+        for image in obj.contentImages.all():
+            urlList.append(trimDefaultURL(image.image.url))
+        return urlList
+        
     class Meta:
         model = Project
-        fields = ['url', 'name', 'desc', 'article', 'link', 'displayImageUrl', 'contentVideoUrl']
+        fields = ['url', 'name', 'desc', 'article', 'link', 'displayImageUrl', 'contentVideoUrl', 'contentImages']
         
 class StartUpSerializer(serializers.HyperlinkedModelSerializer):
     #Uses a method field to just get the image/file URL, without other data
@@ -71,9 +98,16 @@ class StartUpSerializer(serializers.HyperlinkedModelSerializer):
     def get_contentVideoUrl(self, obj):
         return trimDefaultURL(obj.contentVideo.url)
         
+    contentImages = serializers.SerializerMethodField()
+    def get_contentImages(self, obj):
+        urlList = []
+        for image in obj.contentImages.all():
+            urlList.append(trimDefaultURL(image.image.url))
+        return urlList
+        
     class Meta:
         model = StartUp
-        fields = ['url', 'name', 'desc', 'article', 'link', 'displayImageUrl', 'contentVideoUrl']
+        fields = ['url', 'name', 'desc', 'article', 'link', 'displayImageUrl', 'contentVideoUrl', 'contentImages']
 
         
     
