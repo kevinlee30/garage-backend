@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'gdstorage', #App for Google Drive integration
      # Add our new application
-    'api.apps.ApiConfig'
+    'api.apps.ApiConfig',
+    'django_cleanup.apps.CleanupConfig', #To clean up old media files
     # 'backend',
     # 'api'
 ]
@@ -127,32 +129,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Media settings
+#Google Drive backend settings, refer to https://django-googledrive-storage.readthedocs.io/en/latest/
 import os
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-"""
-All uploaded data containing media (images, videos, files) will be moved to the MEDIA_ROOT folder.
-
-e.g.    I upload a file called 'AmbassadorDP.png', to use as the property for an ImageField. 
-        The ImageField has the parameter " upload_to = 'Ambassador Image/' " 
-        The file will now be found at: BASE_DIR/media/Ambassador Image/AmbassadorDP.png
-"""
-MEDIA_URL = 'media/'
-"""
-In development only: media files can be accessed from the media URL.
-
-e.g.    The file is found at: BASE_DIR/media/Ambassador Image/AmbassadorDP.png
-        When running the development server, the image can be retrieved from the browser at the URL:
-            <base URL>/media/Ambassador%20Image/AmbassadorDP.png
-
-Requires a static URL to be addded in urls.py: "urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)"
-
-Important: media files should not be served from the django backend in production. A proper CDN is needed, e.g. Amazon S3.
-In production, after receiving a file, django should upload what it receives to the CDN, using whatver API they provide.
-The local database entry should be updated to have a reference to the final URL provided by the CDN to access the file.
-Finally, the front end accesses the file/image/video using the URL to the CDN, NOT through the django backend.
-The front end should be able to receive that URL from the djangorestframework API response.
-"""
-
+if DEBUG:
+    # In debug mode, the JSON key file is in the file directory & used for authentication. 
+    GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.path.join(BASE_DIR, "eeegaragewebsite-filebackend.json")
+else:
+    # In production, access JSON file data using an environment variable
+    # GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE setting is set to None
+    # Store the JSON data in a variable named "GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS" where it is automatically accessed
+    GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
 
 
