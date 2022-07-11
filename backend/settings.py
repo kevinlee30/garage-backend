@@ -37,16 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',                      #corsheaders so frontend cann access the API
     'rest_framework',
+    'gdstorage',                        #App for Google Drive integration
      # Add our new application
-    'api.apps.ApiConfig'
+    'api.apps.ApiConfig',
+    'django_cleanup.apps.CleanupConfig', #To clean up old media files
     # 'backend',
     # 'api'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+                                                        #add whitenoise here
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',            #cors middleware so frontend cann access the API
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -110,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Singapore'
 
 USE_I18N = True
 
@@ -126,3 +131,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Google Drive backend settings, refer to https://django-googledrive-storage.readthedocs.io/en/latest/
+import os
+if DEBUG:
+    # In debug mode, the JSON key file is in the file directory & used for authentication. 
+    GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.path.join(BASE_DIR, "eeegaragewebsite-filebackend.json")
+else:
+    # Production deployment code here. Might want to use a JSON file again, or save to an environment variable
+    pass
+#cors settings, add front end domains to the whitelist. localhost:3000 is the default domain when using create-react-app for example
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
