@@ -33,7 +33,10 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
         
     contentVideoUrl = serializers.SerializerMethodField()
     def get_contentVideoUrl(self, obj):
-        return trimDefaultURL(obj.contentVideo.url)
+        if (obj.contentVideo.name):
+            return trimDefaultURL(obj.contentVideo.url)
+        else:
+            return None
         
     contentImages = serializers.SerializerMethodField()
     def get_contentImages(self, obj):
@@ -54,7 +57,10 @@ class WorkshopSerializer(serializers.HyperlinkedModelSerializer):
         
     contentVideoUrl = serializers.SerializerMethodField()
     def get_contentVideoUrl(self, obj):
-        return trimDefaultURL(obj.contentVideo.url)
+        if (obj.contentVideo.name):
+            return trimDefaultURL(obj.contentVideo.url)
+        else:
+            return None
         
     contentImages = serializers.SerializerMethodField()
     def get_contentImages(self, obj):
@@ -75,7 +81,10 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
         
     contentVideoUrl = serializers.SerializerMethodField()
     def get_contentVideoUrl(self, obj):
-        return trimDefaultURL(obj.contentVideo.url)
+        if (obj.contentVideo.name):
+            return trimDefaultURL(obj.contentVideo.url)
+        else:
+            return None
         
     contentImages = serializers.SerializerMethodField()
     def get_contentImages(self, obj):
@@ -96,7 +105,10 @@ class StartUpSerializer(serializers.HyperlinkedModelSerializer):
         
     contentVideoUrl = serializers.SerializerMethodField()
     def get_contentVideoUrl(self, obj):
-        return trimDefaultURL(obj.contentVideo.url)
+        if (obj.contentVideo.name):
+            return trimDefaultURL(obj.contentVideo.url)
+        else:
+            return None
         
     contentImages = serializers.SerializerMethodField()
     def get_contentImages(self, obj):
